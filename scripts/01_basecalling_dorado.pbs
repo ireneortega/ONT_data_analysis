@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+module load dorado/0.7.0-foss-2023a-CUDA-12.1.1
+
+
+echo Start Job
+
+date
+
+echo Basecalling using Dorado
+
+
+mkdir ./00_data/01_basecalling
+
+echo Barcode classification in-line with basecalling
+
+dorado basecaller sup ./00_data/00_raw --barcode-both-ends --kit-name SQK-RBK114-96 -v > ./00_data/01_basecalling/calls.bam
+
+
+mkdir ./00_data/01_basecalling/demuxed
+
+echo Splitting the BAM file into the barcode BAM files
+
+dorado demux --emit-fastq --output-dir ./00_data/01_basecalling/demuxed --no-classify ./00_data/01_basecalling/calls.bam
+
+
+date
+
+echo End Job
