@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+module load QUAST/5.2.0-foss-2022a
+
+
+echo Start Job
+
+date
+
+echo Quast
+
+mkdir ./01_data_analysis/02_assembly/03_quast
+cd ./01_data_analysis/02_assembly/03_quast
+
+for genome in ./01_data_analysis/02_assembly/02_medaka_consensus/*/consensus.fasta
+do
+   dirname=$(basename $(dirname "$genome"))
+   quast $genome -o $dirname --min-contig 0 --threads 32
+done
+
+
+
+date
+
+echo End Job

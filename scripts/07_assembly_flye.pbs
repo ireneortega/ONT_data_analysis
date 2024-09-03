@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+module load Flye/2.9.2-GCC-11.3.0
+
+echo Start Job
+
+date
+
+
+echo Assembly using Flye...
+
+mkdir ./01_data_analysis/02_assembly
+mkdir ./01_data_analysis/02_assembly/01_flye
+cd ./01_data_analysis/02_assembly/01_flye
+
+for file in ./01_data_analysis/01_QC/03_bbmap/*_250_qc.fastq
+do
+   echo Assembly for $file
+   sample=$(basename $file _250_qc.fastq)
+   flye --nano-hq $file --out-dir $sample --threads 32
+
+done
+
+
+
+date
+
+echo End Job
+

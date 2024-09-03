@@ -1,0 +1,27 @@
+#!/bin/bash
+
+
+module load medaka/1.11.3-foss-2022a
+
+echo Start Job
+
+date
+
+
+echo Assembly error correction using Medaka...
+
+mkdir ./01_data_analysis/02_assembly/02_medaka_consensus
+cd ./01_data_analysis/02_assembly/02_medaka_consensus
+
+for samplefq in ./01_data_analysis/01_QC/03_bbmap/*_250_qc.fastq
+do
+   sample=$(basename $samplefq _250_qc.fastq)
+   medaka_consensus -i $samplefq -d ./01_data_analysis/02_assembly/01_flye/${sample}/assembly.fasta -o $sample -t 32
+done
+
+
+
+date
+
+echo End Job
+

@@ -1,0 +1,45 @@
+#!/bin/bash
+
+
+echo Start Job
+
+date
+
+
+cd ./01_data_analysis/01_QC/02_porechop
+
+for file in *.fastq
+do
+   
+   sample=$(basename $file .fastq)
+   output_file=${sample}_renameID.fastq
+
+   echo Renaming IDs for $file into $output_file
+
+   awk '{
+      line_number = NR
+      if ((line_number - 1) % 4 == 0) {
+         if ($1 ~ /^@/) {
+            # Obtener el último campo
+            n = split($0, fields, " ")
+            last_field = fields[n]
+
+            # Extract string of the last field just after the last "_"
+            split(last_field, parts, "_")
+            suffix = "_" parts[length(parts)]
+
+            # Add the suffix to the first field
+            $1 = $1 suffix
+         }
+      }
+      print
+   }' $file > $output_file
+
+
+done
+
+
+
+date
+
+echo End Job

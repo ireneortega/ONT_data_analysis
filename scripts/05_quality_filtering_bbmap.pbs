@@ -1,0 +1,33 @@
+#!/bin/bash
+
+
+module load BBMap/39.01-GCC-12.2.0
+
+
+echo Start Job
+
+date
+
+
+echo Read quality filtering using BBMap...
+
+mkdir ./01_data_analysis/01_QC/03_bbmap
+cd ./01_data_analysis/01_QC/03_bbmap
+
+for file in ./01_data_analysis/01_QC/02_porechop/*renameID.fastq
+do
+   sample=$(basename $file _renameID.fastq)
+
+   echo Processing $file using reformat.sh minlength=250
+   reformat.sh in=$file out=${sample}_250.fastq minlength=250
+
+   echo Processing ${sample}_250.fastq using bbduk.sh qtrim=rl trimq=10
+   bbduk.sh in=${sample}_250.fastq out=${sample}_250_qc.fastq qtrim=rl trimq=10 threads=32
+
+   rm ${sample}_250.fastq
+done
+
+
+date
+
+echo End Job

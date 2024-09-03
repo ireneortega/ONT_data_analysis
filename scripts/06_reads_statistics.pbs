@@ -1,0 +1,42 @@
+#!/bin/bash
+
+module load NanoPlot/1.42.0-foss-2022a
+module load FastQC/0.11.9-Java-11
+
+
+echo Start Job
+
+date
+
+
+echo Calculating read statistics using NanoPlot...
+
+mkdir ./01_data_analysis/01_QC/04_stats_after_filtering
+mkdir ./01_data_analysis/01_QC/04_stats_after_filtering/nanoplot
+
+cd ./01_data_analysis/01_QC/04_stats_after_filtering/nanoplot
+
+for file in ./01_data_analysis/01_QC/03_bbmap/*_250_qc.fastq
+do
+    sample=$(basename $file _250_qc.fastq)
+    NanoPlot -t 32 -o ${sample} --fastq $file --loglength --info_in_report
+done
+
+
+
+echo Calculating read statistics using FastQC...
+
+mkdir ./01_data_analysis/01_QC/04_stats_after_filtering/fastqc
+
+cd ./01_data_analysis/01_QC/04_stats_after_filtering/fastqc
+
+for file in ./01_data_analysis/01_QC/03_bbmap/*_250_qc.fastq
+do
+    fastqc -t 32 -o . $file
+done
+
+
+
+date
+
+echo End Job

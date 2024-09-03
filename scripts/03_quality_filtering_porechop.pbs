@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+module load Porechop/0.2.4-intel-2019b-Python-3.7.4
+
+echo Start Job
+
+date
+
+
+echo Read quality filtering using porechop...
+
+mkdir ./01_data_analysis/01_QC/02_porechop
+cd ./01_data_analysis/01_QC/02_porechop
+
+for file in ./00_data/02_fastq/*.fastq
+do
+   sample=$(basename $file .fastq)
+   porechop -i $file -o ${sample}.fastq --threads 32 > ${sample}.log
+done
+
+
+
+date
+
+echo End Job
