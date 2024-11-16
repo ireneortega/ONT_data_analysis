@@ -11,7 +11,7 @@ Here you will find a collection of scripts to analyse long-read sequencing raw d
   
 * **Script 5: 05_quality_filtering_bbmap.pbs**. This script performs quality filering of the reads using BBMap. First, `reformat.sh` will discard any sequences shorter than 250 bp, and, second, `bbduk.sh` will trim both ends of the reads to a minimum quality of 10 using the Phred algorithm.
 
-* **Script 6: 06_assembly_flye.pbs**. This script analyses the quality of the filtered reads using NanoPlot and FastQC.
+* **Script 6: 06_reads_statistics.pbs**. This script analyses the quality of the filtered reads using NanoPlot and FastQC.
 
 * **Script 7: 07_assembly_flye.pbs**. This script assemblies the reads into contings using Flye for high quality reads (in combination with `dorado basecaller sup` in script 1).
 
