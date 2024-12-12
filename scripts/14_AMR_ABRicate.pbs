@@ -4,7 +4,7 @@ echo Start Job
 
 date
 
-echo Searching for AMR genes using ABRicate
+echo Searching for AMR genes using ABRicate and the databases Argannot, CARD, Megares, NCBI and Resfinder
 
 module load ABRicate/0.9.9-gompi-2019b
 
@@ -26,8 +26,12 @@ do
 
    abricate $genome --db resfinder --nopath > ./SA/01_data_analysis/05_AMR_ABRicate/${isolate}_resfinder.tab
 
-
 done
+
+
+echo Concatenate the output for each isolate and database in one single file named abricate_output.tab
+
+head -n 1 ./SA/01_data_analysis/05_AMR_ABRicate/* | tail -n +1 > ./SA/01_data_analysis/05_AMR_ABRicate/abricate_output.tab && tail -n +2 -q ./SA/01_data_analysis/05_AMR_ABRicate/* >> ./SA/01_data_analysis/05_AMR_ABRicate/abricate_output.tab
 
 
 
