@@ -1,12 +1,13 @@
 #!/bin/bash
 
+
 echo Start Job
 
 date
 
-echo Annotating genomes with Prokka using the annotation of the reference genome from GenBank
-#README: replace the path of the Genbank file with the one of interest (if needed) in the parameter --proteins
-#README customize the values for the parameters --genus and --species
+
+echo Annotating genomes using Prokka
+#README: the annotations of a reference genome will be used as reference. Modify the parameter --proteins as desired or removed it
 
 module load prokka/1.14.5-gompi-2020b
 
