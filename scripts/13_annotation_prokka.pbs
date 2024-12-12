@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo Start Job
+
+date
+
+echo Annotating genomes with Prokka using the annotation of the reference genome from GenBank
+#README: replace the path of the Genbank file with the one of interest (if needed) in the parameter --proteins
+#README customize the values for the parameters --genus and --species
+
+module load prokka/1.14.5-gompi-2020b
+
+mkdir ./SA/01_data_analysis/04_annotation
+cd ./SA/01_data_analysis/04_annotation
+
+for genome in ./SA/00_data/03_genomes/*.fasta
+do
+   isolate=$(basename $genome .fasta)
+   locustag="${isolate}_L"
+
+   echo $genome
+
+   prokka $genome --outdir $isolate --prefix $isolate --proteins ./SA/01_data_analysis/NCTC8325.gb --locustag $locustag --genus Staphylococcus --species aureus --strain $isolate --kingdom Bacteria --gcode 11 --usegenus --addgenes --rawproduct
+
+done
+
+
+
+
+date
+
+echo End Job

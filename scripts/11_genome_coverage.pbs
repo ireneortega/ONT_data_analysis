@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo Start Job
+
+date
+
+echo Calculate genome coverage with the fastq reads used to assemble the genome
+
+mkdir ./SA/01_data_analysis/02_assembly/05_coverage
+cd ./SA/01_data_analysis/02_assembly/05_coverage
+
+for genome in ./SA/01_data_analysis/02_assembly/02_medaka_consensus/*/consensus.fasta
+do
+   sample=$(basename $(dirname "$genome"))
+   
+   module load minimap2/2.26-GCCcore-12.2
+   echo Mapping $sample reads to consensus genome obtained by Medaka
+   minimap2 -ax map-ont $genome ./SA/01_data_analysis/01_QC/03_bbmap/${sample}_250_qc.fastq > ${sample}.sam
+
+   module load SAMtools/1.17-GCC-12.2.0
+   echo Converting SAM file to BAM file for $sample 
+   samtools sort ${sample}.sam -o ${sample}.bam
+   samtools coverage ${sample}.bam -o ${sample}_coverage.txt
+
+done
+
+
+
+date
+
+echo End Job
+

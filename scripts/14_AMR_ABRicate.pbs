@@ -1,0 +1,36 @@
+#!/bin/bash
+
+echo Start Job
+
+date
+
+echo Searching for AMR genes using ABRicate
+
+module load ABRicate/0.9.9-gompi-2019b
+
+mkdir ./SA/01_data_analysis/05_AMR_ABRicate
+cd ./SA/01_data_analysis/05_AMR_ABRicate
+
+for genome in ./SA/01_data_analysis/03_genomes/*.fasta
+do
+   isolate=$(basename $genome .fasta)
+   echo Searching for AMR genes in isolate $isolate
+
+   abricate $genome --db argannot --nopath > ./SA/01_data_analysis/05_AMR_ABRicate/${isolate}_argannot.tab
+
+   abricate $genome --db card --nopath > ./SA/01_data_analysis/05_AMR_ABRicate/${isolate}_card.tab
+
+   abricate $genome --db megares --nopath > ./SA/01_data_analysis/05_AMR_ABRicate/${isolate}_megares.tab
+
+   abricate $genome --db ncbi --nopath > ./SA/01_data_analysis/05_AMR_ABRicate/${isolate}_ncbi.tab
+
+   abricate $genome --db resfinder --nopath > ./SA/01_data_analysis/05_AMR_ABRicate/${isolate}_resfinder.tab
+
+
+done
+
+
+
+date
+
+echo End Job
