@@ -13,7 +13,7 @@ module load prokka/1.14.5-gompi-2020b
 mkdir ./SA/01_data_analysis/04_annotation
 cd ./SA/01_data_analysis/04_annotation
 
-for genome in ./SA/00_data/03_genomes/*.fasta
+for genome in ./SA/00_data/03_reordered_genomes/*.fasta
 do
    isolate=$(basename $genome .fasta)
    locustag="${isolate}_L"
