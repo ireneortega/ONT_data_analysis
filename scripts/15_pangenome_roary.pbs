@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo Start Job
+
+date
+
+
+mkdir ./SA/01_data_analysis/06_pangenome
+cd ./SA/01_data_analysis/06_pangenome
+
+mkdir input_files/
+
+echo Preparing gff input files from Prokka
+cp ./SA/01_data_analysis/04_annotation/*/*.gff input_files/
+
+module load Roary/3.13.0-foss-2020a
+
+echo Constructing pangenome using roary
+roary -p 32 -f . input_files/*.gff
+
+
+
+date
+
+echo End Job
