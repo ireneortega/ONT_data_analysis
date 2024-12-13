@@ -31,8 +31,9 @@ done
 
 echo Concatenate the output for each isolate and database in one single file named abricate_output.tab
 
-head -n 1 ./SA/01_data_analysis/05_AMR_ABRicate/* | tail -n +1 > ./SA/01_data_analysis/05_AMR_ABRicate/abricate_output.tab && tail -n +2 -q ./SA/01_data_analysis/05_AMR_ABRicate/* >> ./SA/01_data_analysis/05_AMR_ABRicate/abricate_output.tab
-
+cat *.tab > abricate_output_DEL.tab
+awk '{key=""; for(i=1;i<=NF;i++) key=key$i;}!unique[key]++' abricate_output_DEL.tab > abricate_output.tab
+rm abricate_output_DEL.tab
 
 
 date
