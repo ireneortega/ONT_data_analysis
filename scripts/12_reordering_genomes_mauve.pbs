@@ -17,7 +17,7 @@ do
    isolate=$(basename $genome .fasta)
    echo Reordering $isolate
 
-   java -Xmx500m -cp /kyukon/home/gent/476/vsc47636/mauve_snapshot_2015-02-13/Mauve.jar org.gel.mauve.contigs.ContigOrderer -output $isolate -draft $genome -ref ./SA/01_data_analysis/NCTC8325.fasta
+   java -Xmx500m -cp ./mauve_snapshot_2015-02-13/Mauve.jar org.gel.mauve.contigs.ContigOrderer -output $isolate -draft $genome -ref ./SA/01_data_analysis/NCTC8325.fasta
 
 done
 
