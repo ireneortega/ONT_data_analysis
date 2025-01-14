@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Ortega Sanz
+    given-names: Irene
+    orcid: https://orcid.org/0000-0002-5211-1699
+title: "ONT_data_analysis"
+version: 1.0
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.14645008
+date-released: 2025-01-14
