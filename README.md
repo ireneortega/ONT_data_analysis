@@ -21,7 +21,7 @@ Here you will find a collection of scripts to analyse long-read sequencing raw d
 
 * **Script 10: 10_checkM.pbs**. This script assesses the quality of the assembled draft genomes using [CheckM](https://github.com/Ecogenomics/CheckM/wiki).
   
-* **Script 11: 11_genome_coverage.pbs**. This script calculates the genome coverage of the assembled draft genome by mapping the fastq reads used for assembly using [minimap2] (https://github.com/lh3/minimap2) and [SAMtools](https://www.htslib.org/doc/samtools.html).
+* **Script 11: 11_genome_coverage.pbs**. This script calculates the genome coverage of the assembled draft genome by mapping the fastq reads used for assembly using [minimap2](https://github.com/lh3/minimap2) and [SAMtools](https://www.htslib.org/doc/samtools.html).
 
 * **Script 12: 12_reordering_genomes_mauve.pbs**. This script reorder draft contigs according to the reference genome using [Mauve](https://darlinglab.org/mauve/user-guide/progressivemauve.html). It will help to determine global rearrangement structures based on next gene annotations.
    
